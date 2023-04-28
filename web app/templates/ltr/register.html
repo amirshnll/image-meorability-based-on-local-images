@@ -1,0 +1,143 @@
+{% load static %} {% include '../header.html' %}
+<section>
+  <div class="start-form">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 m-auto text-center"
+        >
+          <p>
+            <img
+              src="{% static 'favicon.png' %}"
+              title="{{ site_title }}"
+              alt="{{ site_title }}"
+            />
+          </p>
+          <h1>{{ site_title }}</h1>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-scale-balanced"></i> {{ agree_rule
+              }}</small
+            >
+            <br />
+            <small
+              ><i class="fa-solid fa-star"></i> {{ inrequired_rule }}</small
+            >
+          </p>
+          <form method="post" action="/register-form/" class="form-group">
+            {% csrf_token %} {% if form_result != "" %}
+            <p
+              class="alert {% if success in form_result %} alert-success {% else %} alert-danger {% endif %}"
+            >
+              {{ form_result }}
+            </p>
+            {% endif %}
+            <p class="text-muted">
+              <small>
+                <label for="emailmobile">
+                  <i class="fa-solid fa-user"></i> {{ emailmobile }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <input
+                class="form-control"
+                autocomplete="off"
+                required="required"
+                maxlength="{{ email_mobile_len }}"
+                type="text"
+                id="emailmobile"
+                name="emailmobile"
+                placeholder="{{ emailmobile_placeholder }}"
+              />
+            </p>
+            <p class="text-muted">
+              <small>
+                <label for="age">
+                  <i class="fa-solid fa-cake-candles"></i> {{ age }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <input
+                class="form-control"
+                type="number"
+                id="age"
+                name="age"
+                placeholder="{{ age_placeholder }}"
+              />
+            </p>
+            <p class="text-muted">
+              <small>
+                <label for="gender">
+                  <i class="fa-solid fa-person-half-dress"></i> {{ gender }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <select name="gender" class="form-select" id="gender">
+                <option value="" selected="selected">
+                  {{ select_default }}
+                </option>
+                <option value="male">{{ male }}</option>
+                <option value="female">{{ female }}</option>
+                <option value="notsay">{{ notsay }}</option>
+              </select>
+            </p>
+            <p class="text-muted">
+              <small>
+                <label for="country">
+                  <i class="fa-solid fa-globe"></i> {{ country }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <select name="country" class="form-select" id="country">
+                <option value="" selected="selected">
+                  {{ select_default }}
+                </option>
+                {% for country_items in country_list %}
+                <option value="{{ country_items.code }}">
+                  {{ country_items.name }}
+                </option>
+                {% endfor %}
+              </select>
+            </p>
+            <p></p>
+            <p>
+              <input
+                class="w-100 btn btn-primary"
+                type="submit"
+                value="{{ verify_button }}"
+              />
+            </p>
+            <p class="text-center">
+              <a
+                class="text-dark text-decoration-none w-100"
+                title="{{ back_button }}"
+                href="/"
+                ><small
+                  ><i class="fa-solid fa-rotate-left"></i> {{ back_button
+                  }}</small
+                ></a
+              >
+            </p>
+          </form>
+          <p>&nbsp;</p>
+          <p class="text-muted">
+            <small><i class="fa-solid fa-copyright"></i> {{ copyright }}</small>
+          </p>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+              }}</small
+            >
+            <br />
+            <small>{{ email }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include '../footer.html' %}

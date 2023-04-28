@@ -1,0 +1,170 @@
+{% load static %} {% include '../header.html' %}
+<header>
+  <div class="home-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-8 float-right">
+          <a
+            class="text-dark text-decoration-none"
+            href="/task"
+            title="{{ site_title }}"
+          >
+            <h1>
+              <img
+                src="{% static 'favicon.png' %}"
+                title="{{ site_title }}"
+                alt="{{ site_title }}"
+              />
+              {{ site_title }}
+            </h1>
+          </a>
+          <p class="text-muted">
+            <i class="fa-solid fa-microscope"></i> {{ site_tag_line }}
+          </p>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-4 float-left">
+          <p class="select-language text-muted text-right">
+            <small
+              ><i class="fa-solid fa-globe"></i> {{ language_select }}</small
+            >
+          </p>
+          <div class="navbar" dir="rtl">
+            <nav>
+              <ul class="nav">
+                {% for langs in available_language %}
+                <li>
+                  <a href="/lang/{{ langs }}" title="{{ langs }}">
+                    <img
+                      width="30"
+                      src="{{ static }}/flag/{{ langs }}.png"
+                      title="{{ langs }}"
+                      alt="{{ langs }}"
+                    />
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="agreement gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h3>{{ delete_title }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-7 float-right">
+          <p class="text-muted">
+            <small>{{ delete_account_description }}</small>
+          </p>
+        </div>
+        <div
+          class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 float-left"
+          dir="rtl"
+        >
+          <p class="text-right">
+            <a
+              class="btn btn-dark bg-dark text-right play-task"
+              title="{{ return_task_buttom }}"
+              href="/setting"
+              >{{ return_task_buttom }} <i class="fa-solid fa-rotate-left"></i
+            ></a>
+          </p>
+          <p class="text-right">
+            <a
+              class="btn btn-danger bg-danger text-right play-task"
+              title="{{ log_out_buttom }}"
+              href="/out"
+              >{{ log_out_buttom }}
+              <i class="fa-solid fa-right-from-bracket"></i
+            ></a>
+          </p>
+        </div>
+        <div class="clearfix"></div>
+        <p>&nbsp;</p>
+      </div>
+      <div class="row">
+        <div
+          class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-light rule-task"
+        >
+          <form method="post" action="/delete-form/" class="form-group">
+            {% csrf_token %} {% if form_result != "" %}
+            <p
+              class="alert {% if success in form_result %} alert-success {% else %} alert-danger {% endif %}"
+            >
+              {{ form_result }}
+            </p>
+            {% endif %}
+            <p class="text-muted">
+              <small>
+                <label for="reason">
+                  <i class="fa-solid fa-thought-bubble"></i> {{ reason }} ({{
+                  inrequired }})
+                </label>
+              </small>
+            </p>
+            <p>
+              <textarea
+                class="form-control"
+                rows="8"
+                maxlength="{{ reason_len }}"
+                id="reason"
+                name="reason"
+                placeholder="{{ delete_account_reason }}"
+              ></textarea>
+            </p>
+            <p>
+              <input
+                class="btn btn-border-danger"
+                type="submit"
+                value="{{ delete_account_button }}"
+              />
+            </p>
+            <p class="text-muted">
+              <small
+                ><i class="fa-solid fa-triangle-exclamation"></i> {{
+                delete_account_message }}</small
+              >
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 float-right">
+            <p class="select-language text-muted text-left">
+              <small
+                ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+                }}</small
+              >
+              <small>{{ email }}</small>
+            </p>
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 float-left">
+            <p class="text-muted">
+              <small
+                ><i class="fa-solid fa-copyright"></i> {{ copyright }}</small
+              >
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% include '../footer.html' %}

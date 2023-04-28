@@ -1,0 +1,45 @@
+{% load static %} {% include '../header.html' %}
+<section>
+  <div class="notfound">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+          <h1>{{ notfound_title }}</h1>
+          <p>{{ notfound_content }}</p>
+          <p>
+            <a class="btn btn-primary blue-bg" href="/" title="{{ backtohome }}"
+              >{{ backtohome }}</a
+            >
+          </p>
+          <p>&nbsp;</p>
+          <p class="text-muted">
+            <small><i class="fa-solid fa-copyright"></i> {{ copyright }}</small>
+          </p>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+              }}</small
+            >
+            <br />
+            <small>{{ email }}</small>
+          </p>
+          {% for langs in available_language %}
+          <a
+            class="text-decoration-none"
+            href="/lang/{{ langs }}"
+            title="{{ langs }}"
+          >
+            <img
+              width="30"
+              src="{{ static }}/flag/{{ langs }}.png"
+              title="{{ langs }}"
+              alt="{{ langs }}"
+            />
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include '../footer.html' %}

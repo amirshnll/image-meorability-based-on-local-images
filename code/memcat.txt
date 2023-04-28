@@ -1,0 +1,8 @@
+memcat images
+https://osf.io/mejyq/download
+
+memcat data/memcat_image_data.csv
+https://osf.io/yecnv/download
+
+memcat data/memcat_raw_memory_data.csv
+https://osf.io/4vjrx/download

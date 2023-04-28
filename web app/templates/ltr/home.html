@@ -1,0 +1,184 @@
+{% load static %} {% include '../header.html' %}
+<header>
+  <div class="home-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-8 float-right">
+          <a
+            class="text-dark text-decoration-none"
+            href="/"
+            title="{{ site_title }}"
+          >
+            <h1>
+              <img
+                src="{% static 'favicon.png' %}"
+                title="{{ site_title }}"
+                alt="{{ site_title }}"
+              />
+              {{ site_title }}
+            </h1>
+          </a>
+          <p class="text-muted">
+            <i class="fa-solid fa-microscope"></i> {{ site_tag_line }}
+          </p>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-4 float-left">
+          <p class="select-language text-muted text-right">
+            <small
+              ><i class="fa-solid fa-globe"></i> {{ language_select }}</small
+            >
+          </p>
+          <div class="navbar" dir="rtl">
+            <nav>
+              <ul class="nav">
+                {% for langs in available_language %}
+                <li>
+                  <a href="/lang/{{ langs }}" title="{{ langs }}">
+                    <img
+                      width="30"
+                      src="{{ static }}/flag/{{ langs }}.png"
+                      title="{{ langs }}"
+                      alt="{{ langs }}"
+                    />
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+</header>
+<section>
+  <div class="agreement gray-bg">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <p>
+            <strong
+              ><i class="fa-solid fa-file-signature"></i> {{ agreement_title
+              }}</strong
+            >
+          </p>
+          <p>{{ agreement_abstract }}</p>
+          <p>
+            <img
+              width="70"
+              src="{% static 'semnan.png' %}"
+              title="{{ university }}"
+              alt="{{ university }}"
+            />
+          </p>
+          {% for task_operator_items in task_operator %}
+          <p>{{ task_operator_items }}</p>
+          {% endfor %}
+          <p class="text-center call-to-action">
+            <a
+              class="btn btn-primary"
+              title="{{ agreement_call_to_action }}"
+              href="/register"
+            >
+              <span><i class="fa-solid fa-circle-play"></i></span
+              ><span>{{ agreement_call_to_action }}</span>
+            </a>
+          </p>
+          <p class="text-center call-to-action">
+            <a
+              class="btn btn-border-dark"
+              title="{{ agreement_call_to_continue_action }}"
+              href="/login"
+            >
+              <span><i class="fa-solid fa-right-to-bracket"></i></span
+              ><span>{{ agreement_call_to_continue_action }}</span>
+            </a>
+          </p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>
+            <strong
+              ><i class="fa-solid fa-circle-info"></i> {{ agreement_description
+              }}</strong
+            >
+          </p>
+          {% for agreement_text_items in agreement_text %}
+          <p>{{ agreement_text_items }}</p>
+          {% endfor %}
+          <p>&nbsp;</p>
+          <p>
+            <strong
+              ><i class="fa-solid fa-circle-play"></i> {{ task_description_title
+              }}</strong
+            >
+          </p>
+          {% for task_description_items in task_description %}
+          <p>{{ task_description_items }}</p>
+          {% endfor %}
+          <p>&nbsp;</p>
+          <p>
+            <img
+              width="70"
+              src="{% static 'semnan.png' %}"
+              title="{{ university }}"
+              alt="{{ university }}"
+            />
+          </p>
+          {% for task_operator_items in task_operator %}
+          <p>{{ task_operator_items }}</p>
+          {% endfor %}
+          <p class="text-center call-to-action">
+            <a
+              class="btn btn-primary"
+              title="{{ agreement_call_to_action }}"
+              href="/register"
+            >
+              <span><i class="fa-solid fa-circle-play"></i></span
+              ><span>{{ agreement_call_to_action }}</span>
+            </a>
+          </p>
+          <p class="text-center call-to-action">
+            <a
+              class="btn btn-border-dark"
+              title="{{ agreement_call_to_continue_action }}"
+              href="/login"
+            >
+              <span><i class="fa-solid fa-right-to-bracket"></i></span
+              ><span>{{ agreement_call_to_continue_action }}</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 float-right">
+            <p class="select-language text-muted text-left">
+              <small
+                ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+                }}</small
+              >
+              <small>{{ email }}</small>
+            </p>
+          </div>
+          <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 float-left">
+            <p class="text-muted">
+              <small
+                ><i class="fa-solid fa-copyright"></i> {{ copyright }}</small
+              >
+            </p>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% include '../footer.html' %}

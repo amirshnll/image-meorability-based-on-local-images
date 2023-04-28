@@ -1,0 +1,86 @@
+{% load static %} {% include '../header.html' %}
+<section>
+  <div class="start-form">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 m-auto text-center"
+        >
+          <p>
+            <img
+              src="{% static 'favicon.png' %}"
+              title="{{ site_title }}"
+              alt="{{ site_title }}"
+            />
+          </p>
+          <h1>{{ site_title }}</h1>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-scale-balanced"></i> {{ agree_rule
+              }}</small
+            >
+          </p>
+          <form method="post" action="/login-form/" class="form-group">
+            {% csrf_token %} {% if form_result != "" %}
+            <p
+              class="alert {% if success in form_result %} alert-success {% else %} alert-danger {% endif %}"
+            >
+              {{ form_result }}
+            </p>
+            {% endif %}
+            <p class="text-muted">
+              <small>
+                <label for="emailmobile">
+                  <i class="fa-solid fa-user"></i> {{ emailmobile }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <input
+                class="form-control"
+                required="required"
+                maxlength="{{ email_mobile_len }}"
+                type="text"
+                id="emailmobile"
+                name="emailmobile"
+                placeholder="{{ emailmobile_placeholder }}"
+              />
+            </p>
+            <p></p>
+            <p>
+              <input
+                class="w-100 btn btn-primary"
+                type="submit"
+                value="{{ login_button }}"
+              />
+            </p>
+            <p class="text-center">
+              <a
+                class="text-dark text-decoration-none btn btn-border-dark w-100"
+                title="{{ regitser_not_yet }}"
+                href="/register"
+                ><small
+                  ><i class="fa-solid fa-user-plus"></i> {{ regitser_not_yet
+                  }}</small
+                ></a
+              >
+            </p>
+          </form>
+          <p>&nbsp;</p>
+          <p class="text-muted">
+            <small><i class="fa-solid fa-copyright"></i> {{ copyright }}</small>
+          </p>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+              }}</small
+            >
+            <br />
+            <small>{{ email }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include '../footer.html' %}

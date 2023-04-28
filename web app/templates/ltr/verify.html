@@ -1,0 +1,84 @@
+{% load static %} {% include '../header.html' %}
+<section>
+  <div class="start-form">
+    <div class="container">
+      <div class="row">
+        <div
+          class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-10 m-auto text-center"
+        >
+          <p>
+            <img
+              src="{% static 'favicon.png' %}"
+              title="{{ site_title }}"
+              alt="{{ site_title }}"
+            />
+          </p>
+          <h1>{{ site_title }}</h1>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-scale-balanced"></i> {{ agree_rule
+              }}</small
+            >
+            <br />
+            <small
+              ><i class="fa-solid fa-circle-check"></i> {{ verify_resson
+              }}</small
+            >
+          </p>
+          <form method="post" action="/verify-form/" class="form-group">
+            {% csrf_token %} {% if form_result != "" %}
+            <p
+              class="alert {% if success in form_result %} alert-success {% else %} alert-danger {% endif %}"
+            >
+              {{ form_result }}
+            </p>
+            {% endif %}
+            <p class="text-muted">
+              <small>
+                <label for="verifycode">
+                  <i class="fa-solid fa-key"></i> {{ verify_code }}
+                </label>
+              </small>
+            </p>
+            <p>
+              <input
+                class="form-control"
+                required="required"
+                maxlength="{{ verify_len }}"
+                type="text"
+                id="verifycode"
+                autocomplete="off"
+                name="verifycode"
+                placeholder="{{ verify_code_placeholder }}"
+              />
+            </p>
+            <p class="text-muted">
+              <small>{{ verify_code_messages }}</small>
+            </p>
+            <p></p>
+            <p>
+              <input
+                class="w-100 btn btn-primary"
+                type="submit"
+                value="{{ start_button }}"
+              />
+            </p>
+          </form>
+          <p>&nbsp;</p>
+          <p class="text-muted">
+            <small><i class="fa-solid fa-copyright"></i> {{ copyright }}</small>
+          </p>
+          <p class="text-muted">
+            <small
+              ><i class="fa-solid fa-envelope"></i> {{ footer_contact_text
+              }}</small
+            >
+            <br />
+            <small>{{ email }}</small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% include '../footer.html' %}

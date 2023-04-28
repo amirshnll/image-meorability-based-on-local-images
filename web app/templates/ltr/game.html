@@ -1,0 +1,56 @@
+{% load static %} {% include '../header.html' %}
+<section>
+  <div class="game-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <p class="text-center text-muted">
+            <small id="irb">{{ game_page_hsa_irb }}</small>
+          </p>
+          <div class="image-box">
+            <div class="image-box-content">
+              <img class="img-fluid" id="fixation" src="{% static
+              "dataset/fixation.jpg" %}"/> {% for image in images %}
+              <img
+                class="img-fluid{% if image.hit == 1 %} hit{% endif %}{% if image.vigilance == 1 %} vigilance{% endif %}"
+                id="img{{ image.id }}"
+                src="{{ image.source }}"
+              />
+              {% endfor %}
+              <p class="text-center d-none" id="hitbtn">
+                <button class="btn hit-button" onclick="hit()">
+                  {{ hit_button }}
+                </button>
+              </p>
+              <p class="text-center" id="startbtn">
+                <button class="btn hit-button" onclick="start()">
+                  {{ start_game }}
+                </button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="loading" id="loading">Loading&#8230;</div>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+  $(window).ready(function () {
+    document.getElementById("loading").classList.add("d-none");
+  });
+</script>
+
+<input type="hidden" value="{{ images_count }}" id="count" />
+<input type="hidden" value="{{ vigilance_count }}" id="vigilancecount" />
+<input type="hidden" value="{{ show_time }}" id="showtime" />
+<input type="hidden" value="{{ rest_time }}" id="resttime" />
+<input type="hidden" value="fixation" id="activeimage" />
+<input type="hidden" value="0" id="lastimage" />
+<input type="hidden" value="0" id="vigilanceerror" />
+<input type="hidden" value="0" id="totalerror" />
+<input type="hidden" value="0" id="appdata" />
+<script src="{% static gamescript %}"></script>
+{% include '../footer.html' %}

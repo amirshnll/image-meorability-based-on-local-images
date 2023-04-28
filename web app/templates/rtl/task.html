@@ -1,0 +1,270 @@
+{% load static %}
+{% include '../header.html' %}
+<header>
+    <div class="home-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-10 col-sm-9 col-8 float-right">
+                    <a class="text-dark text-decoration-none"
+                       href="/task"
+                       title="{{ site_title }}">
+                        <h1>
+                            <img src="{% static 'favicon.png' %}"
+                                 title="{{ site_title }}"
+                                 alt="{{ site_title }}"/>
+                            {{ site_title }}
+                        </h1>
+                    </a>
+                    <p class="text-muted">
+                        <i class="fa-solid fa-microscope"></i> {{ site_tag_line }}
+                </p>
+            </div>
+            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-3 col-4 float-left"
+                 dir="ltr">
+                <p dir="rtl" class="select-language text-muted text-left">
+                    <small><i class="fa-solid fa-globe"></i> {{ language_select }}</small>
+                </p>
+                <div class="navbar">
+                    <nav>
+                        <ul class="nav">
+                            {% for langs in available_language %}
+                                <li>
+                                    <a href="/lang/{{ langs }}" title="{{ langs }}">
+                                        <img width="30"
+                                             src="{{ static }}/flag/{{ langs }}.png"
+                                             title="{{ langs }}"
+                                             alt="{{ langs }}"/>
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+</header>
+<section>
+    <div class="agreement gray-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <h3>{{ levels }}</h3>
+                    <p>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-10 col-lg-10 col-md-9 col-sm-8 col-7 float-right">
+                    <nav>
+                        <div class="navbar">
+                            <div class="navbar">
+                                <ul class="level-pagination nav">
+                                    {% for val in level_list %}
+                                        <li class="nav-item btn {% if val <= level_participant %}btn-passed{% endif %}">{{ val }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                    <p class="text-muted">
+                        <small>{{ data_collect }}</small>
+                    </p>
+                    <p class="call-to-action">
+                        {% if task_end == 0 and flag_count < flag_max %}
+                            <form method="post" action="/game-form/" class="form-group">
+                                {% csrf_token %}
+                                <input type="hidden" name="screen_width" id="screen_width" value="0" />
+                                <input type="hidden" name="screen_height" id="screen_height" value="0" />
+                                <input type="submit" class="btn btn-primary btn-start-game" value="{{ start_game }}" />
+                            </form>
+                        {% endif %}
+                        {% if form_result != "" %}
+                            <p></p><p class="alert {% if success in form_result %} alert-success {% else %} alert-danger {% endif %} ">
+                                {{ form_result }}
+                            </p>
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-4 col-5 float-left"
+                     dir="ltr">
+                    <p class="text-right">
+                        <a class="btn btn-dark bg-dark text-right play-task"
+                           title="{{ edit_user_buttom }}"
+                           href="/setting">{{ edit_user_buttom }} <i class="fa-solid fa-edit"></i></a>
+                    </p>
+                    <p class="text-right">
+                        <a class="btn btn-danger bg-danger text-right play-task"
+                           title="{{ log_out_buttom }}"
+                           href="/out">{{ log_out_buttom }} <i class="fa-solid fa-right-from-bracket"></i></a>
+                    </p>
+                </div>
+                <div class="clearfix"></div>
+                <p>
+                    &nbsp;
+                </p>
+                <p>
+                    &nbsp;
+                </p>
+            </div>
+            <div class="row text-center state-cards">
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-stairs"></i>
+                        <p>
+                            {{ test_completed_caption }}
+                        </p>
+                        <h4>{{ test_completed }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-image"></i>
+                        <p>
+                            {{ image_shown_caption }}
+                        </p>
+                        <h4>{{ image_shown }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <p>
+                            {{ hit_count_caption }}
+                        </p>
+                        <h4>{{ hit_count }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                        <p>
+                            {{ far_count_caption }}
+                        </p>
+                        <h4>{{ far_count }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-flag"></i>
+                        <p>
+                            {{ flag_count_caption }}
+                        </p>
+                        <h4>{{ flag_count }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-person-half-dress"></i>
+                        <p>
+                            {{ user_gender_caption }}
+                        </p>
+                        <h4>{{ user_gender }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-cake-candles"></i>
+                        <p>
+                            {{ user_age_caption }}
+                        </p>
+                        <h4>{{ user_age }}</h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <div class="bg-light state-card">
+                        <i class="fa-solid fa-globe"></i>
+                        <p>
+                            {{ user_country_caption }}
+                        </p>
+                        <h4>{{ user_country }}</h4>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 bg-light rule-task">
+                    <p>
+                        <strong><i class="fa-solid fa-file-signature"></i> {{ agreement_title }}</strong>
+                    </p>
+                    <p>
+                        {{ agreement_abstract }}
+                    </p>
+                    <p>
+                        <img width="70"
+                             src="{% static 'semnan.png' %}"
+                             title="{{ university }}"
+                             alt="{{ university }}"/>
+                    </p>
+                    {% for task_operator_items in task_operator %}
+                        <p>
+                            {{ task_operator_items }}
+                        </p>
+                    {% endfor %}
+                    <p>
+                        &nbsp;
+                    </p>
+                    <p>
+                        <strong><i class="fa-solid fa-circle-info"></i> {{ agreement_description }}</strong>
+                    </p>
+                    {% for agreement_text_items in agreement_text %}
+                        <p>
+                            {{ agreement_text_items }}
+                        </p>
+                    {% endfor %}
+                    <p>
+                        &nbsp;
+                    </p>
+                    <p>
+                        <strong><i class="fa-solid fa-circle-play"></i> {{ task_description_title }}</strong>
+                    </p>
+                    {% for task_description_items in task_description %}
+                        <p>
+                            {{ task_description_items }}
+                        </p>
+                    {% endfor %}
+                    <p>
+                        &nbsp;
+                    </p>
+                    <p>
+                        <img width="70"
+                             src="{% static 'semnan.png' %}"
+                             title="{{ university }}"
+                             alt="{{ university }}"/>
+                    </p>
+                    {% for task_operator_items in task_operator %}
+                        <p>
+                            {{ task_operator_items }}
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 float-right">
+                        <p class="text-muted">
+                            <small><i class="fa-solid fa-copyright"></i> {{ copyright }}</small>
+                        </p>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 float-left"
+                         dir="ltr">
+                        <p dir="rtl" class="select-language text-muted text-left">
+                            <small><i class="fa-solid fa-envelope"></i> {{ footer_contact_text }}</small> <small>{{ email }}</small>
+                        </p>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script src="{% static taskscript %}"></script>
+{% include '../footer.html' %}

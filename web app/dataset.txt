@@ -1,0 +1,20 @@
+
+memcat : randomly sampled 830 images from the MemCat dataset equally from each category.
+{
+    animal: 166 images
+    food: 166 images
+    landscape: 166 images
+    sports: 166 images
+    vehicle: 166 images
+}
+
+170 iranian image : {
+    refrence : google image search
+    total : 170 images
+
+    animal: 34 images
+    food: 34 images
+    landscape: 34 images
+    sports: 34 images
+    vehicle: 34 images
+}
